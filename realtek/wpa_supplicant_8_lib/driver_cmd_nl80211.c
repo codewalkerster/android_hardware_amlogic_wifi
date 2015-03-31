@@ -101,6 +101,11 @@ int wpa_driver_nl80211_driver_cmd(void *priv, char *cmd, char *buf,
 			ret = os_snprintf(buf, buf_len,
 					  "Macaddr = " MACSTR "\n", MAC2STR(macaddr));
 	} else { /* Use private command */
+        if (os_strncasecmp(cmd, "BTCOEXMODE", 10) == 0 ||
+                os_strncasecmp(cmd, "WLS_BATCHING", 12) == 0) {
+            return -1;
+        }
+
 		os_memcpy(buf, cmd, strlen(cmd) + 1);
 		memset(&ifr, 0, sizeof(ifr));
 		memset(&priv_cmd, 0, sizeof(priv_cmd));
