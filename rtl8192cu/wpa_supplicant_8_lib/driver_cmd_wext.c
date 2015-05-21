@@ -334,7 +334,20 @@ int wpa_driver_wext_driver_cmd( void *priv, char *cmd, char *buf, size_t buf_len
 		}
 	}
 
-	ret = ioctl(drv->ioctl_sock, SIOCSIWPRIV, &iwr);
+	if ( os_strncasecmp(cmd, "MACADDR", 7) != 0 &&
+			os_strncasecmp(cmd, "BTCOEXSCAN-STOP", 15) != 0 &&
+			os_strncasecmp(cmd, "RXFILTER-STOP", 13) != 0 &&
+			os_strncasecmp(cmd, "RXFILTER-ADD 3", 14) != 0 &&
+			os_strncasecmp(cmd, "RXFILTER-START", 14) != 0 &&
+			os_strncasecmp(cmd, "RXFILTER-REMOVE 2", 17) != 0 &&
+			os_strncasecmp(cmd, "RSSI", 4) != 0 &&
+			os_strncasecmp(cmd, "BTCOEXMODE 1", 12) != 0 &&
+			os_strncasecmp(cmd, "BTCOEXMODE 2", 12) != 0 &&
+			os_strncasecmp(cmd, "WLS_BATCHING GET", 16) != 0 &&
+			os_strncasecmp(cmd, "WLS_BATCHING STOP", 17) != 0 &&
+			os_strncasecmp(cmd, "LINKSPEED", 9) != 0 &&
+			os_strncasecmp(cmd, "SETBAND 0", 9) != 0 )
+		ret = ioctl(drv->ioctl_sock, SIOCSIWPRIV, &iwr);
 
 	if (ret < 0) {
 		wpa_printf(MSG_ERROR, "%s failed (%d): %s", __func__, ret, cmd);
