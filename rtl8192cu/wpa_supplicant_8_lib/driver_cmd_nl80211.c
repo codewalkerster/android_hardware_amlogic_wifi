@@ -62,6 +62,7 @@ int wpa_driver_nl80211_driver_cmd(void *priv, char *cmd, char *buf,
 		/* temporarily ignore these commands FIXME */
 		if (os_strcasecmp(cmd, "BTCOEXSCAN-STOP") == 0 ||
 		        os_strcasecmp(cmd, "RXFILTER-STOP") == 0 ||
+			os_strncasecmp(cmd, "SETSUSPENDMODE", 14) == 0 ||
 		        os_strncasecmp(cmd, "SETBAND", 7) == 0) {
 			return -1;
 
