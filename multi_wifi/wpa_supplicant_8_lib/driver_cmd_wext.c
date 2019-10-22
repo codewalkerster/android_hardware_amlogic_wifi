@@ -284,7 +284,7 @@ int wpa_driver_wext_driver_cmd( void *priv, char *cmd, char *buf, size_t buf_len
 	struct iwreq iwr;
 	int ret = 0;
 
-	wpa_printf(MSG_DEBUG, "%s %s len = %d", __func__, cmd, buf_len);
+	wpa_printf(MSG_DEBUG, "%s %s len = %zu", __func__, cmd, buf_len);
 
 	if (!drv->driver_is_started && (os_strcasecmp(cmd, "START") != 0)) {
 		wpa_printf(MSG_ERROR,"WEXT: Driver not initialized yet");
@@ -363,7 +363,7 @@ int wpa_driver_wext_driver_cmd( void *priv, char *cmd, char *buf, size_t buf_len
 			wpa_driver_wext_set_scan_timeout(priv);
 			wpa_supplicant_notify_scanning(wpa_s, 1);
 		}
-		wpa_printf(MSG_DEBUG, "%s %s len = %d, %d", __func__, buf, ret, strlen(buf));
+		wpa_printf(MSG_DEBUG, "%s %s len = %d, %zu", __func__, buf, ret, strlen(buf));
 	}
 	return ret;
 }
